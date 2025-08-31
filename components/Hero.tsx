@@ -11,7 +11,7 @@ export default function Hero() {
   const treeCount = 127400;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f6fef9] pt-20 md:pt-0">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f6fef9] pt-20 md:pt-0 pb-20 md:pb-0">
       {/* Enhanced layered green background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         {/* Gradient mesh */}
@@ -32,6 +32,13 @@ export default function Hero() {
       </div>
 
       <div className="container mx-auto px-4 z-10">
+        {/* Development badge */}
+        <div className="absolute top-4 right-4 md:top-8 md:right-8 z-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-100 text-amber-800 rounded-full text-xs font-medium shadow-sm">
+            🚧 Still in Development
+          </div>
+        </div>
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
