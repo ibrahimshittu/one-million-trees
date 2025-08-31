@@ -1,62 +1,75 @@
-'use client'
+"use client";
 
-import { Tree } from '@/types/tree'
+import { Tree } from "@/types/tree";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { 
-  MapPin, 
-  Calendar, 
-  Ruler, 
-  TreePine, 
-  User, 
+} from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  MapPin,
+  Calendar,
+  Ruler,
+  TreePine,
   Heart,
   Share2,
   Download,
   Droplets,
   Wind,
-  Sun
-} from 'lucide-react'
-import Image from 'next/image'
+  Sun,
+} from "lucide-react";
+import Image from "next/image";
 
 interface TreeDetailModalProps {
-  tree: Tree | null
-  isOpen: boolean
-  onClose: () => void
+  tree: Tree | null;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailModalProps) {
-  if (!tree) return null
+export default function TreeDetailModal({
+  tree,
+  isOpen,
+  onClose,
+}: TreeDetailModalProps) {
+  if (!tree) return null;
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'healthy': return 'bg-green-100 text-green-800 border-green-200'
-      case 'growing': return 'bg-blue-100 text-blue-800 border-blue-200'
-      case 'planted': return 'bg-yellow-100 text-yellow-800 border-yellow-200'
-      default: return 'bg-orange-100 text-orange-800 border-orange-200'
+      case "healthy":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "growing":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "planted":
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      default:
+        return "bg-orange-100 text-orange-800 border-orange-200";
     }
-  }
+  };
 
   const handleAdopt = () => {
-    console.log('Adopting tree:', tree.id)
-  }
+    console.log("Adopting tree:", tree.id);
+  };
 
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
         title: `${tree.name} - One Million Trees Nigeria`,
         text: `Check out this ${tree.species} tree planted in ${tree.location.city}, ${tree.location.state}!`,
-        url: window.location.href
-      })
+        url: window.location.href,
+      });
     }
-  }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -64,7 +77,9 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
         <DialogHeader>
           <div className="flex items-start justify-between">
             <div>
-              <DialogTitle className="text-2xl font-bold mb-2">{tree.name}</DialogTitle>
+              <DialogTitle className="text-2xl font-bold mb-2">
+                {tree.name}
+              </DialogTitle>
               <p className="text-muted-foreground">{tree.species}</p>
             </div>
             <Badge className={`${getStatusColor(tree.status)} px-3 py-1`}>
@@ -116,7 +131,9 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
                     <Calendar className="w-5 h-5 text-muted-foreground" />
                     <div>
                       <p className="text-sm text-muted-foreground">Age</p>
-                      <p className="font-medium">{tree.age} year{tree.age !== 1 ? 's' : ''}</p>
+                      <p className="font-medium">
+                        {tree.age} year{tree.age !== 1 ? "s" : ""}
+                      </p>
                     </div>
                   </div>
                 </CardContent>
@@ -131,7 +148,9 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
                     <MapPin className="w-5 h-5 text-muted-foreground" />
                     <div>
                       <p className="text-sm text-muted-foreground">Address</p>
-                      <p className="font-medium">{tree.location.address || 'N/A'}</p>
+                      <p className="font-medium">
+                        {tree.location.address || "N/A"}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -163,7 +182,9 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
                 <CardContent>
                   <p className="font-semibold text-lg">{tree.donorName}</p>
                   {tree.donorMessage && (
-                    <p className="text-muted-foreground mt-2 italic">"{tree.donorMessage}"</p>
+                    <p className="text-muted-foreground mt-2 italic">
+                      &quot;{tree.donorMessage}&quot;
+                    </p>
                   )}
                 </CardContent>
               </Card>
@@ -179,7 +200,9 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
                 </CardHeader>
                 <CardContent>
                   <p className="text-2xl font-bold">{tree.carbonOffset} kg</p>
-                  <p className="text-sm text-muted-foreground">CO₂ absorbed per year</p>
+                  <p className="text-sm text-muted-foreground">
+                    CO₂ absorbed per year
+                  </p>
                 </CardContent>
               </Card>
 
@@ -190,7 +213,9 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
                 </CardHeader>
                 <CardContent>
                   <p className="text-2xl font-bold">~2,000 L</p>
-                  <p className="text-sm text-muted-foreground">Water retained annually</p>
+                  <p className="text-sm text-muted-foreground">
+                    Water retained annually
+                  </p>
                 </CardContent>
               </Card>
 
@@ -201,7 +226,9 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
                 </CardHeader>
                 <CardContent>
                   <p className="text-2xl font-bold">~118 kg</p>
-                  <p className="text-sm text-muted-foreground">Oxygen produced per year</p>
+                  <p className="text-sm text-muted-foreground">
+                    Oxygen produced per year
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -217,15 +244,21 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2">
                     <span className="text-green-500 mt-1">✓</span>
-                    <span>Helps prevent soil erosion and improves soil quality</span>
+                    <span>
+                      Helps prevent soil erosion and improves soil quality
+                    </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-green-500 mt-1">✓</span>
-                    <span>Provides habitat for local wildlife and biodiversity</span>
+                    <span>
+                      Provides habitat for local wildlife and biodiversity
+                    </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-green-500 mt-1">✓</span>
-                    <span>Reduces local temperature through shade and transpiration</span>
+                    <span>
+                      Reduces local temperature through shade and transpiration
+                    </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-green-500 mt-1">✓</span>
@@ -250,11 +283,15 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
                     </div>
                     <div>
                       <p className="font-semibold">Planted</p>
-                      <p className="text-sm text-muted-foreground">{tree.plantedDate}</p>
-                      <p className="text-sm mt-1">Planted by {tree.plantedBy}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {tree.plantedDate}
+                      </p>
+                      <p className="text-sm mt-1">
+                        Planted by {tree.plantedBy}
+                      </p>
                     </div>
                   </div>
-                  
+
                   {tree.donorName && (
                     <div className="flex gap-4">
                       <div className="flex flex-col items-center">
@@ -263,18 +300,22 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
                       </div>
                       <div>
                         <p className="font-semibold">Adopted</p>
-                        <p className="text-sm text-muted-foreground">Sponsored by {tree.donorName}</p>
+                        <p className="text-sm text-muted-foreground">
+                          Sponsored by {tree.donorName}
+                        </p>
                       </div>
                     </div>
                   )}
-                  
+
                   <div className="flex gap-4">
                     <div className="flex flex-col items-center">
                       <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
                     </div>
                     <div>
                       <p className="font-semibold">Last Updated</p>
-                      <p className="text-sm text-muted-foreground">{tree.lastUpdated}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {tree.lastUpdated}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -301,5 +342,5 @@ export default function TreeDetailModal({ tree, isOpen, onClose }: TreeDetailMod
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
