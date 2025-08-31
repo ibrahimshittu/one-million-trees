@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, TreePine, Users, Globe, Leaf } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import StatItem from "@/components/StatItem";
 
 export default function Hero() {
   // Fixed numbers (no continuous random updates) for a calmer, trustworthy presentation
@@ -38,7 +39,7 @@ export default function Hero() {
             🚧 Still in Development
           </div>
         </div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -114,26 +115,4 @@ export default function Hero() {
   );
 }
 
-interface StatItemProps {
-  icon: React.ReactNode;
-  value: string;
-  label: string;
-  subLabel?: string;
-}
-
-const StatItem = ({ icon, value, label, subLabel }: StatItemProps) => (
-  <div className="flex-1 flex flex-col items-center text-center px-6 py-4 relative md:after:absolute md:after:right-0 md:after:bottom-0 md:after:h-28 md:after:w-px md:after:bg-gray-300 md:last:after:hidden">
-    <div className="mb-4">
-      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-green-50 ring-1 ring-green-200 flex items-center justify-center">
-        {icon}
-      </div>
-    </div>
-    <div className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-2 tabular-nums">
-      {value}
-    </div>
-    <div className="text-sm md:text-base font-medium text-gray-700 mb-1">
-      {label}
-    </div>
-    {subLabel && <div className="text-xs text-gray-500">{subLabel}</div>}
-  </div>
-);
+// Local styles now provided by shared StatItem component

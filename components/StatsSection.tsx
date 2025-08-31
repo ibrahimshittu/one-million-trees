@@ -1,50 +1,62 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { treeStats } from "@/data/mockTrees";
-import { TreePine, TrendingUp, Users, Activity } from "lucide-react";
-import { motion } from "framer-motion";
+import { treeStats, mockTrees } from "@/data/mockTrees";
+import { TreePine, TrendingUp, Users, Activity, Leaf } from "lucide-react";
+import StatItem from "@/components/StatItem";
+import { motion, useInView } from "framer-motion";
 import { formatTime } from "@/lib/utils";
 
-export default function StatsSection() {
-  const [animatedStats, setAnimatedStats] = useState({
-    trees: 0,
-    carbon: 0,
-    donations: 0,
-    states: 0,
-  });
-  const [mounted, setMounted] = useState(false);
+// Lightweight count-up hook using rAF (avoids fixed intervals, respects visibility)
+function useCountUp(
+  target: number,
+  duration = 1600,
+  start = 0,
+  startCounting = true
+) {
+  const [value, setValue] = useState(start);
+  const frame = useRef<number | null>(null);
+  const startTime = useRef<number | null>(null);
 
   useEffect(() => {
-    setMounted(true);
-    const duration = 2000;
-    const steps = 60;
-    const interval = duration / steps;
+    if (!startCounting) return;
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+    const loop = (ts: number) => {
+      if (startTime.current == null) startTime.current = ts;
+      const progress = Math.min(1, (ts - startTime.current) / duration);
+      const eased = easeOutCubic(progress);
+      setValue(Math.floor(start + (target - start) * eased));
+      if (progress < 1) frame.current = requestAnimationFrame(loop);
+    };
+    frame.current = requestAnimationFrame(loop);
+    return () => {
+      if (frame.current) cancelAnimationFrame(frame.current);
+    };
+  }, [target, duration, start, startCounting]);
+  return value;
+}
 
-    let currentStep = 0;
-    const timer = setInterval(() => {
-      currentStep++;
-      const progress = currentStep / steps;
+export default function StatsSection() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-      setAnimatedStats({
-        trees: Math.floor(treeStats.totalTrees * progress),
-        carbon: Math.floor(treeStats.totalCarbonOffset * progress),
-        donations: Math.floor(treeStats.totalDonations * progress),
-        states: Math.floor(treeStats.totalStates * progress),
-      });
+  // Derived metrics distinct from hero section
+  const uniqueSpecies = Array.from(
+    new Set(mockTrees.map((t) => t.species))
+  ).length;
+  const healthyCount = mockTrees.filter((t) => t.status === "healthy").length;
+  const healthyPercent = Math.round((healthyCount / mockTrees.length) * 100);
 
-      if (currentStep >= steps) {
-        clearInterval(timer);
-      }
-    }, interval);
-
-    return () => clearInterval(timer);
-  }, []);
+  const donations = useCountUp(treeStats.totalDonations, 1600, 0, inView);
+  const states = useCountUp(treeStats.totalStates, 1600, 0, inView);
+  const species = useCountUp(uniqueSpecies, 1400, 0, inView);
+  const health = useCountUp(healthyPercent, 1400, 0, inView);
 
   return (
-    <section className="py-28 bg-white/90 backdrop-blur-sm">
+    <section className="py-28 bg-white" ref={ref}>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,7 +68,7 @@ export default function StatsSection() {
           <Badge className="mb-4 bg-green-100 text-green-800 border-green-200">
             Our Impact
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4">
             Growing Nigeria&apos;s Green Future
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -64,177 +76,112 @@ export default function StatsSection() {
             climate change and restoring Nigeria&apos;s forests.
           </p>
         </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <TreePine className="w-12 h-12 text-green-600 mx-auto mb-2" />
-                <CardTitle className="text-lg text-gray-600">
-                  Trees Planted
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-4xl font-bold text-gray-900">
-                  {animatedStats.trees.toLocaleString()}
-                </p>
-                <p className="text-sm text-gray-500 mt-2">and counting...</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Activity className="w-12 h-12 text-blue-600 mx-auto mb-2" />
-                <CardTitle className="text-lg text-gray-600">
-                  CO₂ Offset
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-4xl font-bold text-gray-900">
-                  {(animatedStats.carbon / 1000).toFixed(1)}k
-                </p>
-                <p className="text-sm text-gray-500 mt-2">kg per year</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <TrendingUp className="w-12 h-12 text-orange-600 mx-auto mb-2" />
-                <CardTitle className="text-lg text-gray-600">
-                  Total Raised
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-4xl font-bold text-gray-900">
-                  ₦{(animatedStats.donations / 1000000).toFixed(1)}M
-                </p>
-                <p className="text-sm text-gray-500 mt-2">in donations</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Users className="w-12 h-12 text-purple-600 mx-auto mb-2" />
-                <CardTitle className="text-lg text-gray-600">
-                  States Covered
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-4xl font-bold text-gray-900">
-                  {animatedStats.states}
-                </p>
-                <p className="text-sm text-gray-500 mt-2">out of 36 states</p>
-              </CardContent>
-            </Card>
-          </motion.div>
+        <div className="max-w-5xl mx-auto mb-20">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-4 md:gap-0">
+            <StatItem
+              icon={<TrendingUp className="w-7 h-7 text-orange-600" />}
+              value={`₦${(donations / 1_000_000).toFixed(1)}M`}
+              label="Total Raised"
+              subLabel="Fueling reforestation"
+            />
+            <StatItem
+              icon={<Users className="w-7 h-7 text-purple-600" />}
+              value={states.toString()}
+              label="States Covered"
+              subLabel="Nationwide reach"
+            />
+            <StatItem
+              icon={<TreePine className="w-7 h-7 text-green-600" />}
+              value={species.toString()}
+              label="Species Diversity"
+              subLabel="Unique native species"
+            />
+            <StatItem
+              icon={<Leaf className="w-7 h-7 text-blue-600" />}
+              value={`${health}%`}
+              label="Healthy Trees"
+              subLabel="Current vitality"
+            />
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Top Contributors</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {treeStats.topDonors.map((donor, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold
-                        ${
-                          index === 0
-                            ? "bg-gradient-to-r from-yellow-500 to-yellow-600"
-                            : index === 1
-                            ? "bg-gradient-to-r from-gray-400 to-gray-500"
-                            : index === 2
-                            ? "bg-gradient-to-r from-orange-600 to-orange-700"
-                            : "bg-gradient-to-r from-green-500 to-green-600"
-                        }`}
-                      >
-                        {index + 1}
-                      </div>
-                      <div>
-                        <p className="font-semibold">{donor.name}</p>
-                        <p className="text-sm text-gray-500">
-                          {donor.trees.toLocaleString()} trees
-                        </p>
-                      </div>
-                    </div>
-                    {index < 3 && (
-                      <Badge variant={index === 0 ? "default" : "secondary"}>
-                        {index === 0
-                          ? "Champion"
-                          : index === 1
-                          ? "Leader"
-                          : "Partner"}
-                      </Badge>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent Activity</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {treeStats.recentActivity.map((activity) => (
-                  <div key={activity.id} className="flex items-start gap-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="rounded-2xl border border-gray-200/70 p-6 bg-white/70">
+            <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900 mb-6">
+              <span className="relative inline-flex h-5 w-5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-30" />
+                <span className="relative inline-flex rounded-full h-5 w-5 bg-emerald-500" />
+              </span>
+              Top Contributors
+            </h3>
+            <ul className="space-y-5">
+              {treeStats.topDonors.map((donor, index) => (
+                <li
+                  key={donor.name}
+                  className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-50 transition-colors"
+                >
+                  <div className="flex items-center gap-4">
                     <div
-                      className={`w-2 h-2 rounded-full mt-2 flex-shrink-0
+                      className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shadow-sm
                       ${
-                        activity.type === "planted"
-                          ? "bg-green-500"
-                          : activity.type === "donated"
-                          ? "bg-blue-500"
-                          : "bg-purple-500"
+                        index === 0
+                          ? "bg-gradient-to-r from-yellow-500 to-yellow-600"
+                          : index === 1
+                          ? "bg-gradient-to-r from-gray-400 to-gray-500"
+                          : index === 2
+                          ? "bg-gradient-to-r from-orange-600 to-orange-700"
+                          : "bg-gradient-to-r from-green-500 to-green-600"
                       }`}
-                    />
-                    <div className="flex-grow">
-                      <p className="text-sm">{activity.message}</p>
-                      <p className="text-xs text-gray-500">
-                        {mounted ? formatTime(activity.timestamp) : "Recently"}
+                    >
+                      {index + 1}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">
+                        {donor.name}
+                      </p>
+                      <p className="text-xs text-gray-500 tracking-wide uppercase">
+                        {donor.trees.toLocaleString()} trees
                       </p>
                     </div>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-gray-200/70 p-6 bg-white/70">
+            <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900 mb-6">
+              <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+              Recent Activity
+            </h3>
+            <ul className="space-y-5">
+              {treeStats.recentActivity.map((activity) => (
+                <li key={activity.id} className="flex items-start gap-3">
+                  <span
+                    className={`mt-2 inline-block w-2 h-2 rounded-full
+                    ${
+                      activity.type === "planted"
+                        ? "bg-green-500"
+                        : activity.type === "donated"
+                        ? "bg-blue-500"
+                        : "bg-purple-500"
+                    }`}
+                  />
+                  <div>
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                      {activity.message}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {mounted ? formatTime(activity.timestamp) : "Recently"}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
+// Metric component removed in favor of shared StatItem
