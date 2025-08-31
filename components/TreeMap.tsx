@@ -7,7 +7,7 @@ import { mockTrees } from "@/data/mockTrees";
 import { Tree } from "@/types/tree";
 import TreeDetailModal from "./TreeDetailModal";
 import { Card } from "@/components/ui/card";
-import { TreePine, Loader2, Heart } from "lucide-react";
+import { TreePine, Loader2, MapPin } from "lucide-react";
 
 // Set your Mapbox access token
 mapboxgl.accessToken =
@@ -405,8 +405,8 @@ const TreeMap = () => {
             <div>
               <div className="mb-6">
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 text-green-700 text-sm font-medium ring-1 ring-green-200/50">
-                  <Heart className="w-4 h-4" />
-                  Explore Our Trees
+                  <MapPin className="w-4 h-4" />
+                  Explore Trees
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">

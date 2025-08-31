@@ -31,7 +31,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-white via-green-50/40 to-transparent pointer-events-none" />
         <TreeMap />
       </div>
-  <ImpactNews />
+      <ImpactNews />
       <DonationSection />
       <Footer />
     </main>

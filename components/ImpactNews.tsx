@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, Heart } from "lucide-react";
+import { ArrowRight, Newspaper } from "lucide-react";
 
 interface NewsItem {
   id: string;
@@ -74,8 +74,8 @@ export default function ImpactNews() {
           <div className="max-w-2xl">
             <div className="mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 text-green-700 text-sm font-medium ring-1 ring-green-200/50">
-                <Heart className="w-4 h-4" />
-                Join Our Impact
+                <Newspaper className="w-4 h-4" />
+                Latest Updates
               </span>
             </div>
             <h2
@@ -85,7 +85,8 @@ export default function ImpactNews() {
               Impact News Gallery
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              A visual stream of recent field activity and community progress. Hover to read highlights.
+              A visual stream of recent field activity and community progress.
+              Hover to read highlights.
             </p>
           </div>
           <div>
@@ -99,7 +100,7 @@ export default function ImpactNews() {
         </div>
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-5 lg:grid-rows-2 auto-rows-[220px]">
-          {news.slice(0,5).map((item, i) => {
+          {news.slice(0, 5).map((item, i) => {
             const isFeature = i === 0;
             return (
               <motion.article
@@ -110,27 +111,40 @@ export default function ImpactNews() {
                 viewport={{ once: true }}
                 className={[
                   "group relative overflow-hidden rounded-2xl ring-1 ring-gray-200/60 bg-gray-100",
-                  isFeature ? "lg:col-span-3 lg:row-span-2 h-[460px]" : "h-[220px]"
+                  isFeature
+                    ? "lg:col-span-3 lg:row-span-2 h-[460px]"
+                    : "h-[220px]",
                 ].join(" ")}
               >
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  sizes={isFeature ? "(max-width:1024px) 100vw, 60vw" : "(max-width:1024px) 100vw, 40vw"}
-                  className="object-cover transition-transform duration-[1200ms] group-hover:scale-105"/>
+                  sizes={
+                    isFeature
+                      ? "(max-width:1024px) 100vw, 60vw"
+                      : "(max-width:1024px) 100vw, 40vw"
+                  }
+                  className="object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
-                <div className={[
-                  "absolute inset-0 flex flex-col justify-end",
-                  isFeature ? "p-7 md:p-9" : "p-4"
-                ].join(" ")}>
+                <div
+                  className={[
+                    "absolute inset-0 flex flex-col justify-end",
+                    isFeature ? "p-7 md:p-9" : "p-4",
+                  ].join(" ")}
+                >
                   <span className="inline-flex self-start mb-3 px-2 py-0.5 rounded-full bg-white/90 text-[10px] font-medium tracking-wide text-emerald-700 ring-1 ring-emerald-200">
                     {item.category}
                   </span>
-                  <h3 className={[
-                    "font-semibold leading-snug text-white drop-shadow",
-                    isFeature ? "text-2xl md:text-3xl max-w-[34ch]" : "text-sm md:text-base line-clamp-2"
-                  ].join(" ")}>
+                  <h3
+                    className={[
+                      "font-semibold leading-snug text-white drop-shadow",
+                      isFeature
+                        ? "text-2xl md:text-3xl max-w-[34ch]"
+                        : "text-sm md:text-base line-clamp-2",
+                    ].join(" ")}
+                  >
                     {item.title}
                   </h3>
                   {isFeature && (
@@ -140,7 +154,10 @@ export default function ImpactNews() {
                   )}
                   <div className="mt-5 flex items-center justify-between text-[11px] text-white/65">
                     <time dateTime={item.date}>
-                      {new Date(item.date).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
+                      {new Date(item.date).toLocaleDateString(undefined, {
+                        month: "short",
+                        day: "numeric",
+                      })}
                     </time>
                     <span className="inline-flex items-center gap-1 text-emerald-300 group-hover:text-emerald-200 font-medium">
                       Read <ArrowRight className="w-3 h-3" />
@@ -149,7 +166,9 @@ export default function ImpactNews() {
                 </div>
                 {isFeature && (
                   <div className="absolute left-0 top-0 p-5 flex gap-2">
-                    <span className="px-2 py-0.5 rounded-full bg-emerald-600/85 backdrop-blur text-[10px] font-medium text-white ring-1 ring-emerald-300/40">Latest</span>
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-600/85 backdrop-blur text-[10px] font-medium text-white ring-1 ring-emerald-300/40">
+                      Latest
+                    </span>
                   </div>
                 )}
               </motion.article>

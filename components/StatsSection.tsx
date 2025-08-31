@@ -3,7 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { treeStats, mockTrees } from "@/data/mockTrees";
-import { TreePine, TrendingUp, Users, Activity, Leaf } from "lucide-react";
+import {
+  TreePine,
+  TrendingUp,
+  Users,
+  Activity,
+  Leaf,
+  Target,
+} from "lucide-react";
 import StatItem from "@/components/StatItem";
 import { motion, useInView } from "framer-motion";
 import { formatTime } from "@/lib/utils";
@@ -65,9 +72,10 @@ export default function StatsSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <Badge className="mb-4 bg-green-100 text-green-800 border-green-200">
-            Our Impact
-          </Badge>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 text-green-700 text-sm font-medium ring-1 ring-green-200/50 mb-6">
+            <Target className="w-4 h-4" />
+            Environmental Impact
+          </div>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4">
             Growing Nigeria&apos;s Green Future
           </h2>
