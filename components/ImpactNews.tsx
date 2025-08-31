@@ -2,7 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, Newspaper } from "lucide-react";
+import {
+  ArrowRight,
+  Newspaper,
+  Share2,
+  Bookmark,
+  ExternalLink,
+} from "lucide-react";
 
 interface NewsItem {
   id: string;
@@ -11,6 +17,9 @@ interface NewsItem {
   date: string;
   category: string;
   image: string;
+  readTime: string;
+  actionUrl: string;
+  isExternal?: boolean;
 }
 
 const news: NewsItem[] = [
@@ -23,6 +32,8 @@ const news: NewsItem[] = [
     category: "Planting",
     image:
       "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=60",
+    readTime: "3 min read",
+    actionUrl: "/news/mangrove-planting-lagos",
   },
   {
     id: "2",
@@ -33,6 +44,8 @@ const news: NewsItem[] = [
     category: "Partnership",
     image:
       "https://images.unsplash.com/photo-1535909339361-9b83b26655f1?auto=format&fit=crop&w=900&q=60",
+    readTime: "4 min read",
+    actionUrl: "/news/northern-nigeria-partnership",
   },
   {
     id: "3",
@@ -43,6 +56,8 @@ const news: NewsItem[] = [
     category: "Innovation",
     image:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=60",
+    readTime: "5 min read",
+    actionUrl: "/news/drone-tracking-success",
   },
   {
     id: "4",
@@ -53,6 +68,8 @@ const news: NewsItem[] = [
     category: "Community",
     image:
       "https://images.unsplash.com/photo-1492496913980-501348b61469?auto=format&fit=crop&w=900&q=60",
+    readTime: "4 min read",
+    actionUrl: "/news/women-led-cooperative",
   },
   {
     id: "5",
@@ -63,10 +80,43 @@ const news: NewsItem[] = [
     category: "Research",
     image:
       "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=60",
+    readTime: "6 min read",
+    actionUrl: "https://research.onemilliontrees.org/soil-health-study",
+    isExternal: true,
   },
 ];
 
 export default function ImpactNews() {
+  const handleShare = async (item: NewsItem) => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: item.title,
+          text: item.summary,
+          url: window.location.origin + item.actionUrl,
+        });
+      } catch (err) {
+        console.log("Error sharing:", err);
+      }
+    } else {
+      // Fallback to copying to clipboard
+      navigator.clipboard.writeText(window.location.origin + item.actionUrl);
+    }
+  };
+
+  const handleBookmark = (item: NewsItem) => {
+    // In a real app, this would save to user's bookmarks
+    console.log("Bookmarked:", item.title);
+    // You could also show a toast notification here
+  };
+
+  const handleReadMore = (item: NewsItem) => {
+    if (item.isExternal) {
+      window.open(item.actionUrl, "_blank", "noopener,noreferrer");
+    } else {
+      window.location.href = item.actionUrl;
+    }
+  };
   return (
     <section className="py-28 bg-white" aria-labelledby="impact-news-heading">
       <div className="container mx-auto px-4">
@@ -82,19 +132,26 @@ export default function ImpactNews() {
               id="impact-news-heading"
               className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-4"
             >
-              Impact News Gallery
+              Impact Gallery
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              A visual stream of recent field activity and community progress.
-              Hover to read highlights.
+              Discover real-time field updates and community achievements. Click
+              to explore stories, share impact, and get involved in ongoing
+              initiatives.
             </p>
           </div>
-          <div>
+          <div className="flex flex-col sm:flex-row gap-6">
             <a
-              href="#"
+              href="/news"
               className="inline-flex items-center gap-2 text-green-700 font-medium hover:text-green-800 transition-colors"
             >
               View all updates <ArrowRight className="w-4 h-4" />
+            </a>
+            <a
+              href="/get-involved"
+              className="inline-flex items-center gap-2 text-green-700 font-medium hover:text-green-800 transition-colors"
+            >
+              Get Involved <ExternalLink className="w-4 h-4" />
             </a>
           </div>
         </div>
@@ -110,11 +167,12 @@ export default function ImpactNews() {
                 transition={{ duration: 0.65, delay: i * 0.06 }}
                 viewport={{ once: true }}
                 className={[
-                  "group relative overflow-hidden rounded-2xl ring-1 ring-gray-200/60 bg-gray-100",
+                  "group relative overflow-hidden rounded-2xl ring-1 ring-gray-200/60 bg-gray-100 cursor-pointer",
                   isFeature
                     ? "lg:col-span-3 lg:row-span-2 h-[460px]"
                     : "h-[220px]",
                 ].join(" ")}
+                onClick={() => handleReadMore(item)}
               >
                 <Image
                   src={item.image}
@@ -127,6 +185,31 @@ export default function ImpactNews() {
                   }
                   className="object-cover transition-transform duration-[1200ms] group-hover:scale-105"
                 />
+
+                {/* Action buttons overlay */}
+                <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleShare(item);
+                    }}
+                    className="p-2 rounded-full bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white hover:text-gray-900 transition-colors shadow-sm"
+                    title="Share this story"
+                  >
+                    <Share2 className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleBookmark(item);
+                    }}
+                    className="p-2 rounded-full bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-white hover:text-gray-900 transition-colors shadow-sm"
+                    title="Bookmark this story"
+                  >
+                    <Bookmark className="w-4 h-4" />
+                  </button>
+                </div>
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
                 <div
                   className={[
@@ -153,14 +236,23 @@ export default function ImpactNews() {
                     </p>
                   )}
                   <div className="mt-5 flex items-center justify-between text-[11px] text-white/65">
-                    <time dateTime={item.date}>
-                      {new Date(item.date).toLocaleDateString(undefined, {
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </time>
+                    <div className="flex items-center gap-3">
+                      <time dateTime={item.date}>
+                        {new Date(item.date).toLocaleDateString(undefined, {
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </time>
+                      <span className="text-white/50">•</span>
+                      <span>{item.readTime}</span>
+                    </div>
                     <span className="inline-flex items-center gap-1 text-emerald-300 group-hover:text-emerald-200 font-medium">
-                      Read <ArrowRight className="w-3 h-3" />
+                      Read more
+                      {item.isExternal ? (
+                        <ExternalLink className="w-3 h-3" />
+                      ) : (
+                        <ArrowRight className="w-3 h-3" />
+                      )}
                     </span>
                   </div>
                 </div>
@@ -168,6 +260,9 @@ export default function ImpactNews() {
                   <div className="absolute left-0 top-0 p-5 flex gap-2">
                     <span className="px-2 py-0.5 rounded-full bg-emerald-600/85 backdrop-blur text-[10px] font-medium text-white ring-1 ring-emerald-300/40">
                       Latest
+                    </span>
+                    <span className="px-2 py-0.5 rounded-full bg-blue-600/85 backdrop-blur text-[10px] font-medium text-white ring-1 ring-blue-300/40">
+                      Featured
                     </span>
                   </div>
                 )}

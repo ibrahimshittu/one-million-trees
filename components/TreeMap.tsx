@@ -410,7 +410,7 @@ const TreeMap = () => {
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-                Interactive Tree Explorer
+                Tree Explorer
               </h2>
               <p className="text-gray-600 max-w-2xl">
                 Search, filter, and explore live data from our tree planting
