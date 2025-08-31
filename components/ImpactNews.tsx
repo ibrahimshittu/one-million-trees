@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 
 interface NewsItem {
   id: string;
@@ -72,6 +72,12 @@ export default function ImpactNews() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12">
           <div className="max-w-2xl">
+            <div className="mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 text-green-700 text-sm font-medium ring-1 ring-green-200/50">
+                <Heart className="w-4 h-4" />
+                Join Our Impact
+              </span>
+            </div>
             <h2
               id="impact-news-heading"
               className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-4"
