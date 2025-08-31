@@ -77,27 +77,35 @@ export default function TreeDetailModal({
         <DialogHeader>
           <div className="flex items-start justify-between">
             <div>
-              <DialogTitle className="text-2xl font-bold mb-2">
+              <DialogTitle className="text-xl font-bold mb-1">
                 {tree.name}
               </DialogTitle>
-              <p className="text-muted-foreground">{tree.species}</p>
+              <p className="text-sm text-muted-foreground">{tree.species}</p>
             </div>
-            <Badge className={`${getStatusColor(tree.status)} px-3 py-1`}>
+            <Badge
+              className={`${getStatusColor(tree.status)} px-2 py-1 text-xs`}
+            >
               {tree.status}
             </Badge>
           </div>
         </DialogHeader>
 
-        <Tabs defaultValue="overview" className="mt-6">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="impact">Environmental Impact</TabsTrigger>
-            <TabsTrigger value="history">History</TabsTrigger>
+        <Tabs defaultValue="overview" className="mt-4">
+          <TabsList className="grid w-full grid-cols-3 h-9">
+            <TabsTrigger value="overview" className="text-xs">
+              Overview
+            </TabsTrigger>
+            <TabsTrigger value="impact" className="text-xs">
+              Environmental Impact
+            </TabsTrigger>
+            <TabsTrigger value="history" className="text-xs">
+              History
+            </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview" className="mt-6 space-y-6">
+          <TabsContent value="overview" className="mt-4 space-y-4">
             {tree.image && (
-              <div className="relative h-64 w-full rounded-xl overflow-hidden">
+              <div className="relative h-48 w-full rounded-lg overflow-hidden">
                 <Image
                   src={tree.image}
                   alt={tree.name}
@@ -107,31 +115,33 @@ export default function TreeDetailModal({
               </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">Tree Information</CardTitle>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card className="p-4">
+                <CardHeader className="pb-2 px-0 pt-0">
+                  <CardTitle className="text-base">Tree Information</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <TreePine className="w-5 h-5 text-muted-foreground" />
+                <CardContent className="p-0 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <TreePine className="w-4 h-4 text-muted-foreground" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Species</p>
-                      <p className="font-medium">{tree.species}</p>
+                      <p className="text-xs text-muted-foreground">Species</p>
+                      <p className="text-sm font-medium">{tree.species}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Ruler className="w-5 h-5 text-muted-foreground" />
+                  <div className="flex items-center gap-2">
+                    <Ruler className="w-4 h-4 text-muted-foreground" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Height</p>
-                      <p className="font-medium">{tree.height} meters</p>
+                      <p className="text-xs text-muted-foreground">Height</p>
+                      <p className="text-sm font-medium">
+                        {tree.height} meters
+                      </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-muted-foreground" />
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-muted-foreground" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Age</p>
-                      <p className="font-medium">
+                      <p className="text-xs text-muted-foreground">Age</p>
+                      <p className="text-sm font-medium">
                         {tree.age} year{tree.age !== 1 ? "s" : ""}
                       </p>
                     </div>
@@ -139,32 +149,36 @@ export default function TreeDetailModal({
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">Location Details</CardTitle>
+              <Card className="p-4">
+                <CardHeader className="pb-2 px-0 pt-0">
+                  <CardTitle className="text-base">Location Details</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-muted-foreground" />
+                <CardContent className="p-0 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-muted-foreground" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Address</p>
-                      <p className="font-medium">
-                        {tree.location.address || "N/A"}
+                      <p className="text-xs text-muted-foreground">Address</p>
+                      <p className="text-sm font-medium">
+                        {tree.location.address || "Isaac Boro Park"}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-muted-foreground" />
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-muted-foreground" />
                     <div>
-                      <p className="text-sm text-muted-foreground">City</p>
-                      <p className="font-medium">{tree.location.city}</p>
+                      <p className="text-xs text-muted-foreground">City</p>
+                      <p className="text-sm font-medium">
+                        {tree.location.city}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-muted-foreground" />
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-muted-foreground" />
                     <div>
-                      <p className="text-sm text-muted-foreground">State</p>
-                      <p className="font-medium">{tree.location.state}</p>
+                      <p className="text-xs text-muted-foreground">State</p>
+                      <p className="text-sm font-medium">
+                        {tree.location.state}
+                      </p>
                     </div>
                   </div>
                 </CardContent>
@@ -172,148 +186,146 @@ export default function TreeDetailModal({
             </div>
 
             {tree.donorName && (
-              <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <Heart className="w-5 h-5 text-green-600" />
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 border rounded-xl border-green-200 p-4">
+                <div className="pb-4 px-0 pt-0">
+                  <div className="text-base flex items-center gap-2">
+                    <Heart className="w-4 h-4 text-green-600" />
                     Sponsored By
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="font-semibold text-lg">{tree.donorName}</p>
+                  </div>
+                </div>
+                <div className="p-0">
+                  <p className="font-semibold text-base">{tree.donorName}</p>
                   {tree.donorMessage && (
-                    <p className="text-muted-foreground mt-2 italic">
+                    <p className="text-sm text-muted-foreground mt-1 italic">
                       &quot;{tree.donorMessage}&quot;
                     </p>
                   )}
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             )}
           </TabsContent>
 
-          <TabsContent value="impact" className="mt-6 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Card>
-                <CardHeader className="pb-3">
-                  <Wind className="w-8 h-8 text-blue-500 mb-2" />
-                  <CardTitle className="text-lg">Carbon Offset</CardTitle>
+          <TabsContent value="impact" className="mt-4 space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <Card className="p-3">
+                <CardHeader className="pb-2 px-0 pt-0">
+                  <Wind className="w-6 h-6 text-blue-500 mb-1" />
+                  <CardTitle className="text-sm">Carbon Offset</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-2xl font-bold">{tree.carbonOffset} kg</p>
-                  <p className="text-sm text-muted-foreground">
+                <CardContent className="p-0">
+                  <p className="text-xl font-bold">{tree.carbonOffset} kg</p>
+                  <p className="text-xs text-muted-foreground">
                     CO₂ absorbed per year
                   </p>
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <Droplets className="w-8 h-8 text-cyan-500 mb-2" />
-                  <CardTitle className="text-lg">Water Retention</CardTitle>
+              <Card className="p-3">
+                <CardHeader className="pb-2 px-0 pt-0">
+                  <Droplets className="w-6 h-6 text-cyan-500 mb-1" />
+                  <CardTitle className="text-sm">Water Retention</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-2xl font-bold">~2,000 L</p>
-                  <p className="text-sm text-muted-foreground">
+                <CardContent className="p-0">
+                  <p className="text-xl font-bold">~2,000 L</p>
+                  <p className="text-xs text-muted-foreground">
                     Water retained annually
                   </p>
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <Sun className="w-8 h-8 text-yellow-500 mb-2" />
-                  <CardTitle className="text-lg">Oxygen Production</CardTitle>
+              <Card className="p-3">
+                <CardHeader className="pb-2 px-0 pt-0">
+                  <Sun className="w-6 h-6 text-yellow-500 mb-1" />
+                  <CardTitle className="text-sm">Oxygen Production</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-2xl font-bold">~118 kg</p>
-                  <p className="text-sm text-muted-foreground">
+                <CardContent className="p-0">
+                  <p className="text-xl font-bold">~118 kg</p>
+                  <p className="text-xs text-muted-foreground">
                     Oxygen produced per year
                   </p>
                 </CardContent>
               </Card>
             </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Environmental Benefits</CardTitle>
-                <CardDescription>
+            <Card className="p-4">
+              <CardHeader className="pb-2 px-0 pt-0">
+                <CardTitle className="text-base">
+                  Environmental Benefits
+                </CardTitle>
+                <CardDescription className="text-sm">
                   This tree contributes to multiple environmental improvements
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
+              <CardContent className="p-0">
+                <ul className="space-y-1">
                   <li className="flex items-start gap-2">
-                    <span className="text-green-500 mt-1">✓</span>
-                    <span>
+                    <span className="text-green-500 mt-0.5 text-sm">✓</span>
+                    <span className="text-sm">
                       Helps prevent soil erosion and improves soil quality
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-green-500 mt-1">✓</span>
-                    <span>
+                    <span className="text-green-500 mt-0.5 text-sm">✓</span>
+                    <span className="text-sm">
                       Provides habitat for local wildlife and biodiversity
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-green-500 mt-1">✓</span>
-                    <span>
+                    <span className="text-green-500 mt-0.5 text-sm">✓</span>
+                    <span className="text-sm">
                       Reduces local temperature through shade and transpiration
                     </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-green-500 mt-1">✓</span>
-                    <span>Filters air pollutants and improves air quality</span>
                   </li>
                 </ul>
               </CardContent>
             </Card>
           </TabsContent>
 
-          <TabsContent value="history" className="mt-6 space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Tree Timeline</CardTitle>
+          <TabsContent value="history" className="mt-4 space-y-4">
+            <Card className="p-4">
+              <CardHeader className="pb-2 px-0 pt-0">
+                <CardTitle className="text-base">Tree Timeline</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex gap-4">
+              <CardContent className="p-0">
+                <div className="space-y-3">
+                  <div className="flex gap-3">
                     <div className="flex flex-col items-center">
-                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      <div className="w-0.5 h-16 bg-gray-200"></div>
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="w-0.5 h-12 bg-gray-200"></div>
                     </div>
                     <div>
-                      <p className="font-semibold">Planted</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="font-semibold text-sm">Planted</p>
+                      <p className="text-xs text-muted-foreground">
                         {tree.plantedDate}
                       </p>
-                      <p className="text-sm mt-1">
+                      <p className="text-xs mt-0.5">
                         Planted by {tree.plantedBy}
                       </p>
                     </div>
                   </div>
 
                   {tree.donorName && (
-                    <div className="flex gap-4">
+                    <div className="flex gap-3">
                       <div className="flex flex-col items-center">
-                        <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                        <div className="w-0.5 h-16 bg-gray-200"></div>
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <div className="w-0.5 h-12 bg-gray-200"></div>
                       </div>
                       <div>
-                        <p className="font-semibold">Adopted</p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="font-semibold text-sm">Adopted</p>
+                        <p className="text-xs text-muted-foreground">
                           Sponsored by {tree.donorName}
                         </p>
                       </div>
                     </div>
                   )}
 
-                  <div className="flex gap-4">
+                  <div className="flex gap-3">
                     <div className="flex flex-col items-center">
-                      <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
+                      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                     </div>
                     <div>
-                      <p className="font-semibold">Last Updated</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="font-semibold text-sm">Last Updated</p>
+                      <p className="text-xs text-muted-foreground">
                         {tree.lastUpdated}
                       </p>
                     </div>
@@ -324,19 +336,19 @@ export default function TreeDetailModal({
           </TabsContent>
         </Tabs>
 
-        <div className="flex gap-3 mt-6">
+        <div className="flex gap-2 mt-4">
           {!tree.donorName && (
-            <Button onClick={handleAdopt} className="flex-1">
-              <Heart className="w-4 h-4 mr-2" />
-              Adopt This Tree (₦{tree.adoptionPrice.toLocaleString()})
+            <Button onClick={handleAdopt} className="flex-1 text-sm">
+              <Heart className="w-3 h-3 mr-2" />
+              Adopt (₦{tree.adoptionPrice.toLocaleString()})
             </Button>
           )}
-          <Button variant="outline" onClick={handleShare}>
-            <Share2 className="w-4 h-4 mr-2" />
+          <Button variant="outline" onClick={handleShare} className="text-sm">
+            <Share2 className="w-3 h-3 mr-2" />
             Share
           </Button>
-          <Button variant="outline">
-            <Download className="w-4 h-4 mr-2" />
+          <Button variant="outline" className="text-sm">
+            <Download className="w-3 h-3 mr-2" />
             Certificate
           </Button>
         </div>

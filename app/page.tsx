@@ -1,23 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import DonationSection from "@/components/DonationSection";
 import StatsSection from "@/components/StatsSection";
 import ImpactNews from "@/components/ImpactNews";
 import Footer from "@/components/Footer";
-
-const TreeMap = dynamic(() => import("@/components/TreeMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="h-screen flex items-center justify-center bg-gray-50">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
-        <p className="text-gray-600">Loading interactive map...</p>
-      </div>
-    </div>
-  ),
-});
+import TreeMap from "@/components/TreeMap";
 
 export default function Home() {
   return (

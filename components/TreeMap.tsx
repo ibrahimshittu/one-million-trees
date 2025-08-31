@@ -31,7 +31,8 @@ const TreeMap = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const [selectedTree, setSelectedTree] = useState<Tree | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const [statusFilters, setStatusFilters] = useState<string[]>([
@@ -312,38 +313,38 @@ const TreeMap = () => {
         .setLngLat([tree.location.lng, tree.location.lat])
         .addTo(mapRef.current as mapboxgl.Map);
 
-      // Add popup
+      // Add popup with improved styling
       const popupContent = `
-          <div style="padding: 12px; min-width: 200px;">
-            <h3 style="font-weight: bold; font-size: 16px; margin-bottom: 4px;">${tree.name}</h3>
-            <p style="color: #666; font-size: 14px; margin-bottom: 8px; font-style: italic;">${tree.species}</p>
-            <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+          <div style="padding: 8px; min-width: 180px;">
+            <h3 style="font-weight: 600; font-size: 14px; margin-bottom: 2px;">${tree.name}</h3>
+            <p style="color: #666; font-size: 12px; margin-bottom: 6px; font-style: italic;">${tree.species}</p>
+            <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 3px;">
               <span style="color: #666;">Location:</span>
-              <span>${tree.location.city}, ${tree.location.state}</span>
+              <span style="font-size: 10px;">${tree.location.city}, ${tree.location.state}</span>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 3px;">
               <span style="color: #666;">Status:</span>
               <span style="
                 background: ${color}20;
                 color: ${color};
-                padding: 2px 8px;
-                border-radius: 12px;
-                font-size: 11px;
+                padding: 1px 6px;
+                border-radius: 8px;
+                font-size: 9px;
                 font-weight: 600;
               ">${tree.status}</span>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 6px;">
               <span style="color: #666;">CO₂ Offset:</span>
-              <span>${tree.carbonOffset} kg/year</span>
+              <span style="font-size: 10px;">${tree.carbonOffset} kg/year</span>
             </div>
             <button onclick="window.viewTreeDetails('${tree.id}')" style="
               width: 100%;
-              padding: 8px;
+              padding: 6px;
               background: linear-gradient(to right, #16a34a, #15803d);
               color: white;
               border: none;
-              border-radius: 6px;
-              font-size: 13px;
+              border-radius: 4px;
+              font-size: 11px;
               font-weight: 600;
               cursor: pointer;
             ">View Details</button>
@@ -358,16 +359,16 @@ const TreeMap = () => {
 
       marker.setPopup(popup);
 
-      // Add click handler
+      // Add click handler for marker icon - shows quick view modal
       el.addEventListener("click", () => {
         setSelectedTree(tree);
-        setIsModalOpen(true);
+        setIsQuickViewOpen(true);
       });
 
       markersRef.current.push(marker);
     });
 
-    // global helper
+    // global helper for popup button - shows detail modal
     if (typeof window !== "undefined") {
       (
         window as unknown as { viewTreeDetails?: (id: string) => void }
@@ -375,7 +376,7 @@ const TreeMap = () => {
         const tree = mockTrees.find((t) => t.id === id);
         if (tree) {
           setSelectedTree(tree);
-          setIsModalOpen(true);
+          setIsDetailModalOpen(true);
         }
       };
     }
@@ -443,7 +444,10 @@ const TreeMap = () => {
             {/* Map area */}
             <div className="lg:col-span-8 relative">
               <div className="rounded-2xl overflow-hidden shadow-xl ring-1 ring-green-100/60 bg-white/40 backdrop-blur">
-                <div ref={mapContainerRef} className="w-full h-[60vh]" />
+                <div
+                  ref={mapContainerRef}
+                  className="w-full h-[calc(100vh-200px)] min-h-[600px]"
+                />
                 {!mapLoaded && (
                   <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/80 backdrop-blur-sm">
                     <div className="text-center">
@@ -516,13 +520,13 @@ const TreeMap = () => {
                       : `${statusFilters.length} active`}
                   </span>
                 </div>
-                <div className="max-h-[52vh] overflow-y-auto pr-1 custom-scroll space-y-2">
+                <div className="max-h-[calc(100vh-280px)] min-h-[520px] overflow-y-auto pr-1 custom-scroll space-y-2">
                   {filteredTrees.map((tree) => (
                     <button
                       key={tree.id}
                       onClick={() => {
                         setSelectedTree(tree);
-                        setIsModalOpen(true);
+                        setIsQuickViewOpen(true);
                         mapRef.current?.flyTo({
                           center: [tree.location.lng, tree.location.lat],
                           zoom: 9,
@@ -563,18 +567,6 @@ const TreeMap = () => {
                   )}
                 </div>
               </Card>
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <Card className="py-4 bg-white/70 border-0 shadow">
-                  <p className="text-2xl font-bold text-gray-900">
-                    {mockTrees.length}
-                  </p>
-                  <p className="text-xs text-gray-500">Trees Tracked</p>
-                </Card>
-                <Card className="py-4 bg-white/70 border-0 shadow">
-                  <p className="text-2xl font-bold text-gray-900">12</p>
-                  <p className="text-xs text-gray-500">Active States</p>
-                </Card>
-              </div>
             </div>
           </div>
         </div>
@@ -582,8 +574,8 @@ const TreeMap = () => {
 
       <TreeDetailModal
         tree={selectedTree}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isDetailModalOpen}
+        onClose={() => setIsDetailModalOpen(false)}
       />
 
       <style jsx global>{`
