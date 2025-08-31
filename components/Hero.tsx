@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, TreePine, Users, Globe, Leaf } from "lucide-react";
 import Link from "next/link";

@@ -43,7 +43,7 @@ const news: NewsItem[] = [
     date: "2025-08-20",
     category: "Partnership",
     image:
-      "https://images.unsplash.com/photo-1535909339361-9b83b26655f1?auto=format&fit=crop&w=900&q=60",
+      "https://images.unsplash.com/photo-1647220576336-f2e94680f3b8?auto=format&fit=crop&w=900&q=60",
     readTime: "4 min read",
     actionUrl: "/news/northern-nigeria-partnership",
   },

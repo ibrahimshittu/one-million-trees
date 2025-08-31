@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="space-y-3">
             <h3 className="text-xl font-bold">One Million Trees</h3>
             <p className="text-gray-300 text-sm max-w-md">
-              Leading Nigeria's largest reforestation initiative to combat
+              Leading Nigeria&apos;s largest reforestation initiative to combat
               climate change, restore ecosystems, and empower local communities
               through sustainable tree planting programs.
             </p>

@@ -1,16 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import { treeStats, mockTrees } from "@/data/mockTrees";
-import {
-  TreePine,
-  TrendingUp,
-  Users,
-  Activity,
-  Leaf,
-  Target,
-} from "lucide-react";
+import { TreePine, TrendingUp, Users, Leaf, Target } from "lucide-react";
 import StatItem from "@/components/StatItem";
 import { motion, useInView } from "framer-motion";
 import { formatTime } from "@/lib/utils";

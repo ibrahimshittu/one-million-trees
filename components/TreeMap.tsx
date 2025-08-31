@@ -6,12 +6,12 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { mockTrees } from "@/data/mockTrees";
 import { Tree } from "@/types/tree";
 import TreeDetailModal from "./TreeDetailModal";
+import TreeQuickViewModal from "./TreeQuickViewModal";
 import { Card } from "@/components/ui/card";
 import { TreePine, Loader2, MapPin } from "lucide-react";
 
-// Set your Mapbox access token
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiaWJyYWhpbXNoaXR0dSIsImEiOiJjbWV6ZW5vZjAxbjhvMmpxeGhvdmQ1NXgwIn0.Y4rcIm_OOTtlnDzMaUP62w";
+// Set your Mapbox access token from environment variable
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || "";
 
 const ALL_STATUSES = [
   "healthy",
