@@ -11,7 +11,7 @@ export default function Hero() {
   const treeCount = 127400;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f6fef9]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f6fef9] pt-20 md:pt-0">
       {/* Enhanced layered green background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         {/* Gradient mesh */}
@@ -42,43 +42,43 @@ export default function Hero() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur text-green-700 rounded-full text-xs uppercase tracking-wide font-semibold shadow ring-1 ring-green-200 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur text-green-600 rounded-full text-xs uppercase tracking-wide font-semibold shadow-sm ring-1 ring-green-200 mb-8"
           >
             <Leaf className="w-4 h-4" /> Nigeria Reforestation Initiative
           </motion.div>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Plant{" "}
-            <span className="bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
               One Million Trees
             </span>
             <br />
             Across Nigeria
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
             Every tree combats climate change, restores biodiversity and builds
             a sustainable future for communities nationwide.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-5 justify-center mb-12">
-            <Link href="#donate" className="inline-flex">
-              <Button className="py-6 px-6 text-lg font-semibold rounded-xl bg-green-600 hover:bg-green-700">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <Link href="#donate" className="w-full sm:w-auto">
+              <Button className="w-full sm:w-auto py-6 px-8 text-lg font-semibold rounded-xl border-2 border-transparent bg-green-600 text-white hover:bg-green-700 transition-colors">
                 Donate Now <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-            <Link href="#map" className="inline-flex">
+            <Link href="#map" className="w-full sm:w-auto">
               <Button
                 variant="outline"
-                className="py-6 px-6 text-lg font-semibold rounded-xl border-green-600 text-green-700 hover:bg-green-50"
+                className="w-full sm:w-auto py-6 px-8 text-lg font-semibold rounded-xl border-2 border-green-600 text-green-700 hover:bg-green-50 hover:text-green-700 transition-colors"
               >
-                Explore Tree Map <Globe className="ml-2 w-5 h-5" />
+                Explore Trees Planted <Globe className="ml-2 w-5 h-5" />
               </Button>
             </Link>
           </div>
 
           {/* Inline stats similar to reference (icon disc + value + label with separators) */}
-          <div className="mt-14 max-w-5xl mx-auto">
-            <div className="flex flex-col md:flex-row items-stretch md:items-start justify-center md:divide-x md:divide-gray-200/60">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center md:divide-x-0 gap-4 md:gap-0">
               <StatItem
                 icon={<TreePine className="w-7 h-7 text-green-600" />}
                 value={treeCount.toLocaleString()}
@@ -115,16 +115,16 @@ interface StatItemProps {
 }
 
 const StatItem = ({ icon, value, label, subLabel }: StatItemProps) => (
-  <div className="flex-1 flex flex-col items-center text-center px-8 py-8 relative">
-    <div className="mb-6">
-      <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white shadow-sm ring-1 ring-gray-200 flex items-center justify-center">
+  <div className="flex-1 flex flex-col items-center text-center px-6 py-4 relative md:after:absolute md:after:right-0 md:after:bottom-0 md:after:h-28 md:after:w-px md:after:bg-gray-300 md:last:after:hidden">
+    <div className="mb-4">
+      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-green-50 ring-1 ring-green-200 flex items-center justify-center">
         {icon}
       </div>
     </div>
-    <div className="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 mb-3 tabular-nums">
+    <div className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-2 tabular-nums">
       {value}
     </div>
-    <div className="text-sm md:text-base font-medium text-gray-800 mb-0.5">
+    <div className="text-sm md:text-base font-medium text-gray-700 mb-1">
       {label}
     </div>
     {subLabel && <div className="text-xs text-gray-500">{subLabel}</div>}
