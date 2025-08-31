@@ -120,7 +120,7 @@ export default function ImpactNews() {
   return (
     <section className="py-28 bg-white" aria-labelledby="impact-news-heading">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-12">
           <div className="max-w-2xl">
             <div className="mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 text-green-700 text-sm font-medium ring-1 ring-green-200/50">
@@ -134,13 +134,13 @@ export default function ImpactNews() {
             >
               Impact Gallery
             </h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-gray-600 text-lg leading-relaxed mb-6 md:mb-0">
               Discover real-time field updates and community achievements. Click
               to explore stories, share impact, and get involved in ongoing
               initiatives.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-6">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 flex-shrink-0">
             <a
               href="/news"
               className="inline-flex items-center gap-2 text-green-700 font-medium hover:text-green-800 transition-colors"
@@ -156,7 +156,7 @@ export default function ImpactNews() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-5 lg:grid-rows-2 auto-rows-[220px]">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-5 lg:grid-rows-2 lg:auto-rows-[220px]">
           {news.slice(0, 5).map((item, i) => {
             const isFeature = i === 0;
             return (
@@ -169,8 +169,8 @@ export default function ImpactNews() {
                 className={[
                   "group relative overflow-hidden rounded-2xl ring-1 ring-gray-200/60 bg-gray-100 cursor-pointer",
                   isFeature
-                    ? "lg:col-span-3 lg:row-span-2 h-[460px]"
-                    : "h-[220px]",
+                    ? "h-[300px] lg:col-span-3 lg:row-span-2 lg:h-[460px]"
+                    : "h-[250px] lg:h-[220px]",
                 ].join(" ")}
                 onClick={() => handleReadMore(item)}
               >
@@ -224,14 +224,14 @@ export default function ImpactNews() {
                     className={[
                       "font-semibold leading-snug text-white drop-shadow",
                       isFeature
-                        ? "text-2xl md:text-3xl max-w-[34ch]"
+                        ? "text-sm md:text-3xl max-w-[34ch]"
                         : "text-sm md:text-base line-clamp-2",
                     ].join(" ")}
                   >
                     {item.title}
                   </h3>
                   {isFeature && (
-                    <p className="mt-5 text-[13px] md:text-sm text-white/85 leading-relaxed max-w-[68ch] line-clamp-[10]">
+                    <p className="mt-5 text-[13px] md:text-sm text-white/85 leading-relaxed max-w-[68ch] line-clamp-[10] hidden md:block">
                       {item.summary}
                     </p>
                   )}

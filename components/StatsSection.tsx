@@ -69,14 +69,17 @@ export default function StatsSection() {
             Environmental Impact
           </div>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4">
-            Growing Nigeria&apos;s Green Future
+            Growing Nigeria&apos;s{" "}
+            <span className="bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
+              Green Future
+            </span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Together, we&apos;re making a measurable difference in combating
             climate change and restoring Nigeria&apos;s forests.
           </p>
         </motion.div>
-        <div className="max-w-5xl mx-auto mb-16">
+        <div className="max-w-5xl mx-auto mb-16 hidden md:block">
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-4 md:gap-0">
             <StatItem
               icon={<TrendingUp className="w-7 h-7 text-orange-600" />}

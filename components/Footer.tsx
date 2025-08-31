@@ -4,18 +4,18 @@ import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-950 text-white py-12">
+    <footer className="bg-gray-950 text-white py-8 md:py-12">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+        <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row md:justify-between md:items-start">
           {/* Left side - Logo/Brand */}
-          <div className="space-y-3">
+          <div className="space-y-3 text-center md:text-left">
             <h3 className="text-xl font-bold">One Million Trees</h3>
-            <p className="text-gray-300 text-sm max-w-md">
+            <p className="text-gray-300 text-sm max-w-md mx-auto md:mx-0">
               Leading Nigeria&apos;s largest reforestation initiative to combat
               climate change, restore ecosystems, and empower local communities
               through sustainable tree planting programs.
             </p>
-            <div className="flex gap-4 pt-2">
+            <div className="flex gap-4 pt-2 justify-center md:justify-start">
               <a
                 href="#"
                 className="text-gray-400 hover:text-green-400 transition-colors"
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
 
           {/* Right side - Contact Info */}
-          <div className="text-right space-y-2">
+          <div className="text-center md:text-right space-y-2">
             <div className="text-sm text-gray-300">
               <p>Lagos, Nigeria</p>
               <p>contact@onemilliontrees.ng</p>
@@ -58,7 +58,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom border and copyright */}
-        <div className="border-t border-gray-800 mt-8 pt-6 text-center">
+        <div className="border-t border-gray-800 mt-6 md:mt-8 pt-4 md:pt-6 text-center">
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} One Million Trees Initiative. All
             rights reserved.

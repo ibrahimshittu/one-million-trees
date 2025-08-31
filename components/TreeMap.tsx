@@ -6,7 +6,6 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { mockTrees } from "@/data/mockTrees";
 import { Tree } from "@/types/tree";
 import TreeDetailModal from "./TreeDetailModal";
-import TreeQuickViewModal from "./TreeQuickViewModal";
 import { Card } from "@/components/ui/card";
 import { TreePine, Loader2, MapPin } from "lucide-react";
 
@@ -32,7 +31,6 @@ const TreeMap = () => {
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const [selectedTree, setSelectedTree] = useState<Tree | null>(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const [statusFilters, setStatusFilters] = useState<string[]>([
@@ -359,10 +357,10 @@ const TreeMap = () => {
 
       marker.setPopup(popup);
 
-      // Add click handler for marker icon - shows quick view modal
+      // Add click handler for marker icon - shows detail modal
       el.addEventListener("click", () => {
         setSelectedTree(tree);
-        setIsQuickViewOpen(true);
+        setIsDetailModalOpen(true);
       });
 
       markersRef.current.push(marker);
@@ -526,7 +524,7 @@ const TreeMap = () => {
                       key={tree.id}
                       onClick={() => {
                         setSelectedTree(tree);
-                        setIsQuickViewOpen(true);
+                        setIsDetailModalOpen(true);
                         mapRef.current?.flyTo({
                           center: [tree.location.lng, tree.location.lat],
                           zoom: 9,

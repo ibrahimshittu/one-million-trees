@@ -3,9 +3,10 @@ import { mockTrees } from "@/data/mockTrees";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const tree = mockTrees.find((t) => t.id === params.id);
+  const { id } = await params;
+  const tree = mockTrees.find((t) => t.id === id);
 
   if (!tree) {
     return NextResponse.json(
@@ -25,11 +26,12 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
-    const treeIndex = mockTrees.findIndex((t) => t.id === params.id);
+    const treeIndex = mockTrees.findIndex((t) => t.id === id);
 
     if (treeIndex === -1) {
       return NextResponse.json(
@@ -65,9 +67,10 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const treeIndex = mockTrees.findIndex((t) => t.id === params.id);
+  const { id } = await params;
+  const treeIndex = mockTrees.findIndex((t) => t.id === id);
 
   if (treeIndex === -1) {
     return NextResponse.json(
