@@ -11,11 +11,24 @@ export default function Hero() {
   const treeCount = 127400;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-green-50 via-white to-green-50/40">
-      {/* Decorative subtle shapes */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f6fef9]">
+      {/* Enhanced layered green background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.15),transparent_60%)]" />
-        <div className="absolute -bottom-40 -right-32 w-[36rem] h-[36rem] bg-green-200/40 blur-3xl rounded-full" />
+        {/* Gradient mesh */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_25%,#dcfce7_0%,rgba(220,252,231,0)_55%),radial-gradient(circle_at_82%_70%,#bbf7d0_0%,rgba(187,247,208,0)_60%),radial-gradient(circle_at_60%_20%,#d9f99d_0%,rgba(217,249,157,0)_55%),linear-gradient(to_bottom,#ffffff,#f0fdf4)]" />
+        {/* Soft vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.07),transparent_70%)] mix-blend-multiply" />
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 opacity-[0.08] bg-[linear-gradient(to_right,#059669_1px,transparent_1px),linear-gradient(to_bottom,#059669_1px,transparent_1px)] bg-[size:160px_160px]" />
+        {/* Noise overlay */}
+        <div
+          className="absolute inset-0 opacity-10 mix-blend-overlay"
+          style={{
+            backgroundImage:
+              "url('data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'160\\' height=\\'160\\' viewBox=\\'0 0 160 160\\'><filter id=\\'n\\'><feTurbulence type=\\'fractalNoise\\' baseFrequency=\\'.8\\' numOctaves=\\'4\\' stitchTiles=\\'stitch\\'/></filter><rect width=\\'160\\' height=\\'160\\' filter=\\'url(%23n)\\' opacity=\\'.35'/></svg>')",
+            backgroundSize: "320px 320px",
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-4 z-10">
@@ -47,20 +60,16 @@ export default function Hero() {
             a sustainable future for communities nationwide.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
-            <Link href="#donate">
-              <Button
-                size="lg"
-                className="text-base md:text-lg px-8 py-6 bg-green-600 hover:bg-green-700 shadow-lg hover:shadow-xl font-semibold"
-              >
+          <div className="flex flex-col sm:flex-row gap-5 justify-center mb-12">
+            <Link href="#donate" className="inline-flex">
+              <Button className="py-6 px-6 text-lg font-semibold rounded-xl bg-green-600 hover:bg-green-700">
                 Donate Now <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-            <Link href="#map">
+            <Link href="#map" className="inline-flex">
               <Button
-                size="lg"
                 variant="outline"
-                className="text-base md:text-lg px-8 py-6 border-2 border-green-600 text-green-700 hover:bg-green-50 font-semibold"
+                className="py-6 px-6 text-lg font-semibold rounded-xl border-green-600 text-green-700 hover:bg-green-50"
               >
                 Explore Tree Map <Globe className="ml-2 w-5 h-5" />
               </Button>

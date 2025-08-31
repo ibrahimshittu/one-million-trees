@@ -54,7 +54,7 @@ export default function DonationSection() {
   return (
     <section
       id="donate"
-      className="py-24 bg-gradient-to-b from-white via-green-50/30 to-white"
+      className="py-32 bg-gradient-to-b from-white via-green-50/50 to-white"
     >
       <div className="container mx-auto px-4">
         <motion.div

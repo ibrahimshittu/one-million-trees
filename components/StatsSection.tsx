@@ -44,7 +44,7 @@ export default function StatsSection() {
   }, []);
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-28 bg-white/90 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

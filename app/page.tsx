@@ -19,15 +19,18 @@ const TreeMap = dynamic(() => import("@/components/TreeMap"), {
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col">
+    <main className="min-h-screen flex flex-col bg-[radial-gradient(circle_at_20%_15%,#dcfce7_0%,transparent_55%),radial-gradient(circle_at_80%_85%,#bbf7d0_0%,transparent_60%)]">
       <Hero />
       <div className="relative">
-        <div className="absolute inset-0 h-40 bg-gradient-to-b from-white to-transparent pointer-events-none" />
+        <div className="absolute inset-0 h-32 bg-gradient-to-b from-white to-transparent pointer-events-none" />
         <StatsSection />
       </div>
-      <TreeMap />
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-green-50/40 to-transparent pointer-events-none" />
+        <TreeMap />
+      </div>
       <DonationSection />
-      <footer className="mt-auto bg-gray-900 text-white py-12">
+      <footer className="mt-auto bg-gray-900 text-white py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
