@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import DonationSection from "@/components/DonationSection";
 import StatsSection from "@/components/StatsSection";
+import ImpactGallery from "@/components/ImpactGallery";
 
 const TreeMap = dynamic(() => import("@/components/TreeMap"), {
   ssr: false,
@@ -25,6 +26,7 @@ export default function Home() {
         <div className="absolute inset-0 h-32 bg-gradient-to-b from-white to-transparent pointer-events-none" />
         <StatsSection />
       </div>
+      <ImpactGallery />
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-b from-white via-green-50/40 to-transparent pointer-events-none" />
         <TreeMap />

@@ -76,7 +76,7 @@ export default function StatsSection() {
             climate change and restoring Nigeria&apos;s forests.
           </p>
         </motion.div>
-        <div className="max-w-5xl mx-auto mb-20">
+        <div className="max-w-5xl mx-auto mb-16">
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-4 md:gap-0">
             <StatItem
               icon={<TrendingUp className="w-7 h-7 text-orange-600" />}
@@ -106,49 +106,44 @@ export default function StatsSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          <div className="rounded-2xl border border-gray-200/70 p-6 bg-white/70">
+          <div className="rounded-2xl border border-gray-200 p-6 bg-white">
             <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900 mb-6">
-              <span className="relative inline-flex h-5 w-5">
+              <span className="relative inline-flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-30" />
-                <span className="relative inline-flex rounded-full h-5 w-5 bg-emerald-500" />
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
               </span>
               Top Contributors
             </h3>
             <ul className="space-y-5">
               {treeStats.topDonors.map((donor, index) => (
-                <li
-                  key={donor.name}
-                  className="flex items-center justify-between rounded-lg p-2 hover:bg-gray-50 transition-colors"
-                >
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shadow-sm
-                      ${
-                        index === 0
-                          ? "bg-gradient-to-r from-yellow-500 to-yellow-600"
-                          : index === 1
-                          ? "bg-gradient-to-r from-gray-400 to-gray-500"
-                          : index === 2
-                          ? "bg-gradient-to-r from-orange-600 to-orange-700"
-                          : "bg-gradient-to-r from-green-500 to-green-600"
-                      }`}
-                    >
-                      {index + 1}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-900">
-                        {donor.name}
-                      </p>
-                      <p className="text-xs text-gray-500 tracking-wide uppercase">
-                        {donor.trees.toLocaleString()} trees
-                      </p>
-                    </div>
+                <li key={donor.name} className="flex items-center gap-4">
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold shadow-sm
+                    ${
+                      index === 0
+                        ? "bg-yellow-500"
+                        : index === 1
+                        ? "bg-gray-500"
+                        : index === 2
+                        ? "bg-orange-600"
+                        : "bg-emerald-600"
+                    }`}
+                  >
+                    {index + 1}
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-900 leading-tight">
+                      {donor.name}
+                    </p>
+                    <p className="text-xs text-gray-500 tracking-wide uppercase">
+                      {donor.trees.toLocaleString()} Trees
+                    </p>
                   </div>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl border border-gray-200/70 p-6 bg-white/70">
+          <div className="rounded-2xl border border-gray-200 p-6 bg-white">
             <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-900 mb-6">
               <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
               Recent Activity

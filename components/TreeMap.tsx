@@ -10,7 +10,8 @@ import { Card } from "@/components/ui/card";
 import { TreePine, Loader2 } from "lucide-react";
 
 // Set your Mapbox access token
-mapboxgl.accessToken = "";
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiaWJyYWhpbXNoaXR0dSIsImEiOiJjbWV6ZW5vZjAxbjhvMmpxeGhvdmQ1NXgwIn0.Y4rcIm_OOTtlnDzMaUP62w";
 
 const ALL_STATUSES = [
   "healthy",
