@@ -2,11 +2,10 @@
 
 A professional, interactive web platform for tracking and supporting tree planting initiatives across Nigeria. Built with Next.js, TypeScript, and modern UI components.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyour-username%2Fone-million-trees)
-
 ## 🚀 Features
 
 ### Interactive Tree Map
+
 - **Nigeria-Focused Visualization**: Dedicated map showing only Nigeria with masked boundaries
 - **Real-time Tree Tracking**: Click-enabled markers showing all planted trees
 - **Tree Details**: Comprehensive information including species, location, planting date, and environmental impact
@@ -14,6 +13,7 @@ A professional, interactive web platform for tracking and supporting tree planti
 - **Status Indicators**: Color-coded markers for tree health status
 
 ### Donation System
+
 - **Multiple Tiers**: Four professionally designed donation packages
 - **Custom Amounts**: Flexible donation options with impact calculator
 - **Environmental Impact**: Real-time calculation of CO₂ offset and oxygen production
@@ -21,6 +21,7 @@ A professional, interactive web platform for tracking and supporting tree planti
 - **Digital Certificates**: Automated certificate generation for donors
 
 ### Environmental Impact Dashboard
+
 - **Live Statistics**: Real-time tree count and activity feed
 - **Carbon Offset Tracking**: Measurable CO₂ absorption metrics
 - **State-by-State Analysis**: Detailed breakdown by Nigerian states
@@ -28,6 +29,7 @@ A professional, interactive web platform for tracking and supporting tree planti
 - **Activity Timeline**: Recent planting and donation activities
 
 ### Professional Design
+
 - **Shadcn/UI Components**: Consistent, accessible design system
 - **Responsive Layout**: Optimized for all devices
 - **Smooth Animations**: Framer Motion for engaging interactions
@@ -90,56 +92,37 @@ NEXT_PUBLIC_FLUTTERWAVE_KEY=your-flutterwave-public-key
 ## 🗺️ Roadmap
 
 ### Phase 1: Foundation (Current) ✅
+
 - [x] Interactive map with Nigeria focus
 - [x] Tree marker system with popups
 - [x] Donation tiers and packages
-- [x] Basic statistics dashboard
+- [ ] Basic statistics dashboard
 - [x] Responsive design implementation
 - [x] Mock data for demonstrations
 
-### Phase 2: Backend Integration (Q1 2025)
+### Phase 2: Backend Integration (Q3/Q4 2025)
+
 - [ ] Database setup (PostgreSQL/Supabase)
-- [ ] User authentication system
 - [ ] Admin dashboard for tree management
 - [ ] Real payment gateway integration
 - [ ] Email notification system
 - [ ] Digital certificate generation
 
-### Phase 3: Enhanced Features (Q2 2025)
 - [ ] User profiles and donation history
 - [ ] Social sharing capabilities
 - [ ] Tree adoption program
 - [ ] Monthly progress reports
-- [ ] Mobile app development (React Native)
-- [ ] Multi-language support (English, Yoruba, Hausa, Igbo)
-
-### Phase 4: Community Features (Q3 2025)
-- [ ] Corporate partnership portal
-- [ ] School programs integration
-- [ ] Community leaderboards
-- [ ] Volunteer coordination system
-- [ ] Tree planting events calendar
 - [ ] Impact stories and blog
 
-### Phase 5: Advanced Analytics (Q4 2025)
-- [ ] AI-powered growth predictions
-- [ ] Satellite imagery integration
-- [ ] Carbon credit marketplace
-- [ ] Environmental impact API
-- [ ] Research data portal
-- [ ] Government reporting dashboard
+### Phase 3: Scale & Expansion (2026)
 
-### Phase 6: Scale & Expansion (2026)
-- [ ] Expand to other West African countries
-- [ ] Blockchain-based tree certificates
-- [ ] IoT sensor integration for tree monitoring
-- [ ] Virtual reality tree tours
 - [ ] Partnership with international organizations
 - [ ] Carbon offset marketplace for businesses
 
 ## 🌍 API Endpoints
 
 ### Trees API
+
 - `GET /api/trees` - Get all trees (with filtering)
 - `GET /api/trees/[id]` - Get specific tree details
 - `POST /api/trees` - Add new tree
@@ -147,10 +130,12 @@ NEXT_PUBLIC_FLUTTERWAVE_KEY=your-flutterwave-public-key
 - `DELETE /api/trees/[id]` - Remove tree
 
 ### Donations API
+
 - `POST /api/donations` - Process new donation
 - `GET /api/donations` - Get recent donations
 
 ### Stats API
+
 - `GET /api/stats` - Get platform statistics
 
 ## 🎨 Design System
@@ -160,7 +145,7 @@ The project uses a professional green-themed design:
 - **Primary Green**: `#16a34a` - Environmental action
 - **Light Green**: `#f0fdf4` - Backgrounds
 - **Accent Gold**: `#fbbf24` - Achievements
-- **Status Colors**: 
+- **Status Colors**:
   - Healthy: Green
   - Growing: Blue
   - Planted: Yellow
@@ -169,6 +154,7 @@ The project uses a professional green-themed design:
 ## 📱 Key Components
 
 ### Core Components
+
 - `TreeMap.tsx` - Nigeria-focused interactive map
 - `TreeDetailModal.tsx` - Comprehensive tree information
 - `DonationSection.tsx` - Professional donation tiers
@@ -176,6 +162,7 @@ The project uses a professional green-themed design:
 - `Hero.tsx` - Landing page hero section
 
 ### API Routes
+
 - `/api/trees` - Tree management
 - `/api/donations` - Donation processing
 - `/api/stats` - Statistics endpoints
@@ -191,6 +178,7 @@ We welcome contributions! Please follow these steps:
 5. Open a Pull Request
 
 ### Development Guidelines
+
 - Follow the existing code style
 - Write meaningful commit messages
 - Add tests for new features
@@ -215,9 +203,10 @@ Every tree planted through this platform contributes to:
 ## 💚 Support
 
 For support, questions, or partnerships:
-- Email: support@onemilliontrees.ng
-- Twitter: @OneMillionTreesNG
-- Website: [onemilliontrees.ng](https://onemilliontrees.ng)
+
+- Email: support@onemilliontrees.org
+- Twitter: @OneMillionTrees
+- Website: [onemilliontrees.org](https://onemilliontrees.org)
 
 ## 🏆 Acknowledgments
 
