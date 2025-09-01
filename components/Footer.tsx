@@ -51,7 +51,7 @@ export default function Footer() {
           <div className="text-center md:text-right space-y-2">
             <div className="text-sm text-gray-300">
               <p>Lagos, Nigeria</p>
-              <p>contact@onemilliontrees.ng</p>
+              <p>support@onemilliontrees.org</p>
               <p>(+234) 901-234-5678</p>
             </div>
           </div>

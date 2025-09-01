@@ -1,23 +1,21 @@
 # 🌳 One Million Trees Nigeria
 
-A professional, interactive web platform for tracking and supporting tree planting initiatives across Nigeria. Built with Next.js, TypeScript, and modern UI components.
+An interactive web platform for tracking and supporting tree planting initiatives across Nigeria. Built with Next.js, TypeScript, and modern UI components.
 
 ## 🚀 Features
 
 ### Interactive Tree Map
 
-- **Nigeria-Focused Visualization**: Dedicated map showing only Nigeria with masked boundaries
 - **Real-time Tree Tracking**: Click-enabled markers showing all planted trees
 - **Tree Details**: Comprehensive information including species, location, planting date, and environmental impact
 - **State Coverage**: Visual representation of planting density across Nigerian states
-- **Status Indicators**: Color-coded markers for tree health status
 
 ### Donation System
 
 - **Multiple Tiers**: Four professionally designed donation packages
 - **Custom Amounts**: Flexible donation options with impact calculator
 - **Environmental Impact**: Real-time calculation of CO₂ offset and oxygen production
-- **Secure Processing**: Ready for Paystack, Flutterwave, and Interswitch integration
+- **Secure Processing**: Ready for Paystack integration
 - **Digital Certificates**: Automated certificate generation for donors
 
 ### Environmental Impact Dashboard
@@ -28,20 +26,12 @@ A professional, interactive web platform for tracking and supporting tree planti
 - **Top Contributors**: Recognition for major donors
 - **Activity Timeline**: Recent planting and donation activities
 
-### Professional Design
-
-- **Shadcn/UI Components**: Consistent, accessible design system
-- **Responsive Layout**: Optimized for all devices
-- **Smooth Animations**: Framer Motion for engaging interactions
-- **Clean Typography**: Professional spacing and hierarchy
-- **Glass Morphism**: Modern UI effects and overlays
-
 ## 🛠️ Tech Stack
 
 - **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4 + Shadcn/UI
-- **Maps**: Leaflet + React Leaflet
+- **Maps**: Mapbox
 - **Animation**: Framer Motion
 - **Icons**: Lucide React
 - **Deployment**: Vercel
@@ -64,21 +54,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## 🚀 Deployment on Vercel
-
-The easiest way to deploy this Next.js app is using [Vercel](https://vercel.com), the platform from the creators of Next.js.
-
-### One-Click Deploy
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyour-username%2Fone-million-trees)
-
-### Manual Deployment
-
-1. Push your code to a GitHub repository
-2. Import your repository on [Vercel](https://vercel.com/new)
-3. Vercel will automatically detect Next.js and configure the build settings
-4. Click "Deploy" and your application will be live in minutes
-
 ### Environment Variables
 
 For production deployment, set these environment variables in Vercel:
@@ -86,7 +61,6 @@ For production deployment, set these environment variables in Vercel:
 ```env
 NEXT_PUBLIC_API_URL=your-api-endpoint
 NEXT_PUBLIC_PAYSTACK_KEY=your-paystack-public-key
-NEXT_PUBLIC_FLUTTERWAVE_KEY=your-flutterwave-public-key
 ```
 
 ## 🗺️ Roadmap
@@ -107,7 +81,6 @@ NEXT_PUBLIC_FLUTTERWAVE_KEY=your-flutterwave-public-key
 - [ ] Real payment gateway integration
 - [ ] Email notification system
 - [ ] Digital certificate generation
-
 - [ ] User profiles and donation history
 - [ ] Social sharing capabilities
 - [ ] Tree adoption program
@@ -138,35 +111,6 @@ NEXT_PUBLIC_FLUTTERWAVE_KEY=your-flutterwave-public-key
 
 - `GET /api/stats` - Get platform statistics
 
-## 🎨 Design System
-
-The project uses a professional green-themed design:
-
-- **Primary Green**: `#16a34a` - Environmental action
-- **Light Green**: `#f0fdf4` - Backgrounds
-- **Accent Gold**: `#fbbf24` - Achievements
-- **Status Colors**:
-  - Healthy: Green
-  - Growing: Blue
-  - Planted: Yellow
-  - Needs Attention: Orange
-
-## 📱 Key Components
-
-### Core Components
-
-- `TreeMap.tsx` - Nigeria-focused interactive map
-- `TreeDetailModal.tsx` - Comprehensive tree information
-- `DonationSection.tsx` - Professional donation tiers
-- `StatsSection.tsx` - Live statistics dashboard
-- `Hero.tsx` - Landing page hero section
-
-### API Routes
-
-- `/api/trees` - Tree management
-- `/api/donations` - Donation processing
-- `/api/stats` - Statistics endpoints
-
 ## 🤝 Contributing
 
 We welcome contributions! Please follow these steps:
@@ -181,7 +125,6 @@ We welcome contributions! Please follow these steps:
 
 - Follow the existing code style
 - Write meaningful commit messages
-- Add tests for new features
 - Update documentation as needed
 - Ensure responsive design is maintained
 
