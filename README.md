@@ -67,9 +67,8 @@ NEXT_PUBLIC_PAYSTACK_KEY=your-paystack-public-key
 
 ### Phase 1: Foundation (Current) ✅
 
-- [x] Interactive map with Nigeria focus
-- [x] Tree marker system with popups
-- [x] Donation tiers and packages
+- [x] Interactive map
+- [x] Tree marker system
 - [ ] Basic statistics dashboard
 - [x] Responsive design implementation
 - [x] Mock data for demonstrations
@@ -141,7 +140,7 @@ Every tree planted through this platform contributes to:
 - **Biodiversity**: Habitat for local wildlife
 - **Soil Health**: Erosion prevention and soil enrichment
 - **Water Cycle**: Improved water retention and rainfall patterns
-- **Community**: Jobs and sustainable development
+- **Community**: Sustainable development
 
 ## 💚 Support
 
@@ -153,8 +152,6 @@ For support, questions, or partnerships:
 
 ## 🏆 Acknowledgments
 
-- Nigerian Federal Ministry of Environment
-- State Forestry Departments
 - Local communities across Nigeria
 - All our donors and volunteers
 

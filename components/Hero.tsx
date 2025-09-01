@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, TreePine, Users, Globe, Leaf } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import StatItem from "@/components/StatItem";
 
@@ -68,19 +67,23 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Link href="#donate" className="w-full sm:w-auto">
-              <Button className="w-full sm:w-auto py-6 px-8 text-lg font-semibold rounded-xl border-2 border-transparent bg-green-600 text-white hover:bg-green-700 transition-colors">
-                Donate Now <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link href="#map" className="w-full sm:w-auto">
-              <Button
-                variant="outline"
-                className="w-full sm:w-auto py-6 px-8 text-lg font-semibold rounded-xl border-2 border-green-600 text-green-700 hover:bg-green-50 hover:text-green-700 transition-colors"
-              >
-                Explore Trees Planted <Globe className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
+            <Button 
+              onClick={() => {
+                document.getElementById('donate')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="w-full sm:w-auto py-6 px-8 text-lg font-semibold rounded-xl border-2 border-transparent bg-green-600 text-white hover:bg-green-700 transition-colors"
+            >
+              Donate Now <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+            <Button
+              onClick={() => {
+                document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              variant="outline"
+              className="w-full sm:w-auto py-6 px-8 text-lg font-semibold rounded-xl border-2 border-green-600 text-green-700 hover:bg-green-50 hover:text-green-700 transition-colors"
+            >
+              Explore Trees Planted <Globe className="ml-2 w-5 h-5" />
+            </Button>
           </div>
 
           {/* Inline stats similar to reference (icon disc + value + label with separators) */}
